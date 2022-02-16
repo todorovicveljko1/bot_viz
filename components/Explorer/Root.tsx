@@ -27,7 +27,7 @@ export function Root(props: RootProps) {
     const [isOpen, setIsOpen] = useState(true);
     const { active } = useTurnData();
     return (
-        <VStack p="4">
+        <VStack p="4" px="6">
             <UnorderedList listStyleType={"none"} mx={"unset"}>
                 <ListItem my="0.5">
                     <HStack
@@ -53,7 +53,7 @@ export function Root(props: RootProps) {
                         )}
                     </HStack>
                     <Collapse in={isOpen}>
-                        <UnorderedList listStyleType={"none"} ml="6">
+                        <UnorderedList listStyleType={"none"} ml="8">
                             {props.root && <Block {...props.root}></Block>}
                         </UnorderedList>
                     </Collapse>

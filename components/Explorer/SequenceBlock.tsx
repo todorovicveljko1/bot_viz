@@ -43,7 +43,7 @@ export function SequenceBlock(props: SequenceBlockProps) {
                 )}
             </HStack>
             <Collapse in={isOpen}>
-                <UnorderedList listStyleType={"none"} ml="6">
+                <UnorderedList listStyleType={"none"} ml="8">
                     {props.childrens?.map((v) => (
                         <Block key={v._id} {...v}></Block>
                     ))}

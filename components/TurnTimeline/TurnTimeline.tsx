@@ -16,8 +16,8 @@ export function TurnTimeline(props: TurnTimelineProps) {
     const { colorMode } = useColorMode();
     const c =
         colorMode == "light"
-            ? ["gray.400", "gray.300"]
-            : ["gray.600", "gray.700"];
+            ? ["gray.300", "gray.100", "gray.200"]
+            : ["whiteAlpha.400", "whiteAlpha.200", "whiteAlpha.300"];
     return (
         <VStack
             align="center"
@@ -39,6 +39,9 @@ export function TurnTimeline(props: TurnTimelineProps) {
                                 as={Button}
                                 key={turn + i - 12}
                                 bgColor={i == 12 ? c[0] : c[1]}
+                                _hover={{
+                                    bgColor: c[2],
+                                }}
                                 py="1"
                                 minW="16"
                                 textAlign={"center"}

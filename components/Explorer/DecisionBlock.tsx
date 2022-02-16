@@ -49,7 +49,7 @@ export function DecisionBlock(props: DecisionBlockProps) {
                 )}
             </HStack>
             <Collapse in={isOpen}>
-                <UnorderedList listStyleType={"none"} ml="5">
+                <UnorderedList listStyleType={"none"} ml="8">
                     {props.childrens && props.childrens[0] && (
                         <HStack alignItems="start">
                             <Block {...props.childrens[0]}>
