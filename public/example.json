@@ -1,0 +1,212 @@
+{
+    "_id": 0,
+    "_type": "DecisionLogic",
+    "root": {
+        "_id": 7,
+        "_type": "SequenceBlock",
+        "childrens": [
+            {
+                "_id": 5,
+                "_type": "DecisionBlock",
+                "method": "closeToFlage",
+                "childrens": [
+                    {
+                        "_id": 1,
+                        "_type": "ActionBlock",
+                        "method": "moveToFlage"
+                    },
+                    {
+                        "_id": 7,
+                        "_type": "SequenceBlock",
+                        "childrens": [
+                            {
+                                "_id": 5,
+                                "_type": "ActionBlock",
+                                "method": "MoveToEnemy"
+                            },
+                            {
+                                "_id": 2,
+                                "_type": "ActionBlock",
+                                "method": "MoveToNPC"
+                            },
+                            {
+                                "_id": 1,
+                                "_type": "ActionBlock",
+                                "method": "Explore"
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "_id": 6,
+                "_type": "ActionBlock",
+                "method": "Explore"
+            },
+            {
+                "_id": 10,
+                "_type": "DecisionBlock",
+                "method": "closeToFlage",
+                "childrens": [
+                    {
+                        "_id": 1,
+                        "_type": "ActionBlock",
+                        "method": "moveToFlage"
+                    }
+                ]
+            }
+        ]
+    },
+    "turns": [
+        {
+            "debug": [
+                {
+                    "time": 1000,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 1000,
+                    "status": "FAIL"
+                },
+                {
+                    "time": 20,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                }
+            ],
+            "data": [],
+            "annotations": []
+        },
+        {
+            "debug": [
+                {
+                    "time": 188060,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 18800,
+                    "status": "FAIL"
+                },
+                {
+                    "time": 100,
+                    "status": "FAIL"
+                },
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 110000,
+                    "status": "FAIL"
+                },
+                {
+                    "time": 10000,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                }
+            ],
+            "data": [],
+            "annotations": []
+        },
+        {
+            "debug": [
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 100,
+                    "status": "SUCCESS"
+                },
+                {
+                    "time": 0,
+                    "status": "FAIL"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                },
+                {
+                    "time": 0,
+                    "status": "PENDING"
+                }
+            ],
+            "data": [],
+            "annotations": []
+        }
+    ]
+}
