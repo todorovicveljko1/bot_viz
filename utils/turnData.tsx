@@ -8,6 +8,7 @@ type TurnData = {
 
 interface DebugDataProviderProps {
     children: any;
+    root?: any;
     turns?: TurnData[] | any;
 }
 
@@ -18,6 +19,8 @@ type contextData = {
     nextTurn: () => void;
     prevTurn: () => void;
     setTurn: (turn: number) => void;
+    newFile: (data: any) => void;
+    root: any;
 };
 
 const TurnDataContext = createContext<any>(null);
@@ -25,7 +28,7 @@ export const TurnDataProvider = (props: DebugDataProviderProps) => {
     const [turn, _setTurn] = useState(-1);
     const [data, setTurnsData] = useState(props.turns);
     const [active, setActiveTurn] = useState<TurnData | null>(null);
-
+    const [root, setRoot] = useState(props.root);
     const nextTurn = () => {
         console.log(data.length, turn);
         if (data && data.length > turn + 1) {
@@ -47,10 +50,25 @@ export const TurnDataProvider = (props: DebugDataProviderProps) => {
             setActiveTurn(data[_turn]);
         }
     };
+    const newFile = (_data: any) => {
+        _setTurn(-1);
+        setTurnsData(_data.turns);
+        setRoot(_data.root);
+        setActiveTurn(null);
+    };
 
     return (
         <TurnDataContext.Provider
-            value={{ turn, data, active, nextTurn, prevTurn, setTurn }}
+            value={{
+                turn,
+                data,
+                active,
+                nextTurn,
+                prevTurn,
+                setTurn,
+                root,
+                newFile,
+            }}
         >
             {props.children}
         </TurnDataContext.Provider>

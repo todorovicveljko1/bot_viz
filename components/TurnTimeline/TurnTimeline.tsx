@@ -31,29 +31,30 @@ export function TurnTimeline(props: TurnTimelineProps) {
                 alignItems="center"
                 fontWeight={"medium"}
             >
-                {Array(25)
-                    .fill(0)
-                    .map((k, i) => (
-                        <Box
-                            as={Button}
-                            key={turn + i - 12}
-                            bgColor={i == 12 ? c[0] : c[1]}
-                            py="1"
-                            minW="16"
-                            textAlign={"center"}
-                            borderRadius="md"
-                            size="sm"
-                            onClick={() => setTurn(turn + i - 12)}
-                            opacity={
-                                turn + i - 12 < 0 ||
-                                turn + i - 12 >= data.length
-                                    ? 0
-                                    : 100
-                            }
-                        >
-                            {turn + i - 12}
-                        </Box>
-                    ))}
+                {data &&
+                    Array(25)
+                        .fill(0)
+                        .map((k, i) => (
+                            <Box
+                                as={Button}
+                                key={turn + i - 12}
+                                bgColor={i == 12 ? c[0] : c[1]}
+                                py="1"
+                                minW="16"
+                                textAlign={"center"}
+                                borderRadius="md"
+                                size="sm"
+                                onClick={() => setTurn(turn + i - 12)}
+                                opacity={
+                                    turn + i - 12 < 0 ||
+                                    turn + i - 12 >= data.length
+                                        ? 0
+                                        : 100
+                                }
+                            >
+                                {turn + i - 12}
+                            </Box>
+                        ))}
             </HStack>
             <HStack>
                 <IconButton

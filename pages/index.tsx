@@ -6,27 +6,50 @@ import {
     HStack,
     Collapse,
     VStack,
+    Box,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import { useState } from "react";
-import { Root } from "../components/Explorer/Root";
 import { Dashboard } from "../components/Layout/Dashboard";
-import { TurnTimeline } from "../components/TurnTimeline/TurnTimeline";
-import data from "../public/example.json";
-import { TurnDataProvider } from "../utils/turnData";
+import Dropzone from "react-dropzone";
+import { useTurnData } from "../utils/turnData";
+import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    const { newFile } = useTurnData();
+    const router = useRouter();
     return (
         <Dashboard plane={true}>
-            <TurnDataProvider turns={data.turns}>
-                <VStack align="start">
-                    <HStack minH="78vh" align={"start"}>
-                        <Root {...data}></Root>
-                    </HStack>
-                    <TurnTimeline />
-                </VStack>
-            </TurnDataProvider>
+            <HStack align={"stretch"} justifyContent={"center"} py="8">
+                <Dropzone
+                    onDrop={(acceptedFiles) => {
+                        if (acceptedFiles[0])
+                            acceptedFiles[0]
+                                .text()
+                                .then((v) => JSON.parse(v))
+                                .then((v) => {
+                                    newFile(v);
+                                    router.push("./app");
+                                });
+                    }}
+                >
+                    {({ getRootProps, getInputProps }) => (
+                        <VStack
+                            border={"2px"}
+                            borderStyle="dashed"
+                            borderColor="gray"
+                            p="8"
+                        >
+                            <Box {...getRootProps()}>
+                                <input {...getInputProps()} />
+                                <Text mx="10">
+                                    Drop some files here, or click to select
+                                    files
+                                </Text>
+                            </Box>
+                        </VStack>
+                    )}
+                </Dropzone>
+            </HStack>
         </Dashboard>
     );
 };
