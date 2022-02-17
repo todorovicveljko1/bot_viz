@@ -35,7 +35,9 @@ export function SequenceBlock(props: SequenceBlockProps) {
                 }
             >
                 {props.children}
-                <Text fontWeight={"bold"}>Sequence</Text>
+                <Text fontWeight={"bold"} cursor="pointer">
+                    Sequence
+                </Text>
                 {active && active.debug[props._id] && (
                     <Text color="gray.500" pl="1">
                         {ms_time(active.debug[props._id].time)}

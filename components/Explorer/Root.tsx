@@ -27,7 +27,7 @@ export function Root(props: RootProps) {
     const [isOpen, setIsOpen] = useState(true);
     const { active } = useTurnData();
     return (
-        <VStack p="4" px="6">
+        <VStack py="5" alignItems={"start"} height={"full"} overflowY="scroll">
             <UnorderedList listStyleType={"none"} mx={"unset"}>
                 <ListItem my="0.5">
                     <HStack
@@ -38,14 +38,15 @@ export function Root(props: RootProps) {
                         px="4"
                         mb="2"
                         borderLeft={"4px"}
-                        borderRadius={"base"}
                         borderColor={
                             active?.debug[props._id]
                                 ? statusPick[active.debug[props._id].status]
                                 : "transparent"
                         }
                     >
-                        <Text fontWeight={"bold"}>DecisionLogic</Text>
+                        <Text fontWeight={"bold"} cursor="pointer">
+                            DecisionLogic
+                        </Text>
                         {active && active.debug[props._id] && (
                             <Text color="gray.500" pl="1">
                                 {ms_time(active.debug[props._id].time)}

@@ -38,7 +38,9 @@ export function DecisionBlock(props: DecisionBlockProps) {
                 }
             >
                 {props.children}
-                <Text fontWeight={"bold"}>Decision </Text>
+                <Text fontWeight={"bold"} cursor="pointer">
+                    Decision{" "}
+                </Text>
                 <Code px="2" fontSize={"md"}>
                     {props.method}
                 </Code>{" "}

@@ -7,6 +7,7 @@ import {
     Collapse,
     VStack,
     Box,
+    useToast,
 } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { Dashboard } from "../components/Layout/Dashboard";
@@ -16,6 +17,7 @@ import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
     const { newFile } = useTurnData();
+    const toast = useToast();
     const router = useRouter();
     return (
         <Dashboard plane={true}>
@@ -27,8 +29,29 @@ const Home: NextPage = () => {
                                 .text()
                                 .then((v) => JSON.parse(v))
                                 .then((v) => {
+                                    if (!!!v.turns || !!!v.root) {
+                                        toast({
+                                            title: "JSON file format error",
+                                            description:
+                                                "exprects turns and root keys in json file",
+                                            duration: 3000,
+                                            status: "error",
+                                            variant: "top-accent",
+                                        });
+                                    }
+
                                     newFile(v);
                                     router.push("./app");
+                                })
+                                .catch(() => {
+                                    toast({
+                                        title: "JSON file error",
+                                        description:
+                                            "error while parsing json file",
+                                        duration: 3000,
+                                        status: "error",
+                                        variant: "top-accent",
+                                    });
                                 });
                     }}
                 >

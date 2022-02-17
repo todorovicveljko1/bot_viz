@@ -8,10 +8,10 @@ export interface DashboardProps {
 
 export function Dashboard(props: DashboardProps) {
     return (
-        <VStack align="stretch" overflow={"hidden"}>
+        <VStack spacing="0" align="stretch" overflow={"hidden"}>
             <Navbar />
             {props.plane ? (
-                <>{props.children}</>
+                <Box mt="8">{props.children}</Box>
             ) : (
                 <Box p="4" pt="2">
                     {props.children}

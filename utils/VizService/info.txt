@@ -1,0 +1,40 @@
+INITIAL FORMAT:
+data : {
+    metadata:{
+        map_type: "HEX" | "SQUARE"
+        tile_types:{
+            "TYPE0":"COLOR0",
+            "TYPE1":"COLOR1"
+        }
+    }
+    map:{
+        "0_0" : @TILE_DATA@
+    }
+    players:{
+        me:PLAYER_DATA
+        others:[
+            PLAYER_DATA
+        ]
+    }
+}
+
+tile_data:{
+    type: "TYPE0"
+    ...rest
+}
+
+UPDATE FORMAT:
+data : {
+    // ONLY UPDATED TILES
+    map: {
+        
+    }
+    // ONLY FOR ONE TURN
+    annotations: {
+
+    }
+}
+PLAYER_DATA:{
+    pos : "0_0"
+    ...rest
+}
