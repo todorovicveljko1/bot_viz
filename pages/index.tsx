@@ -1,14 +1,4 @@
-import {
-    List,
-    UnorderedList,
-    ListItem,
-    Text,
-    HStack,
-    Collapse,
-    VStack,
-    Box,
-    useToast,
-} from "@chakra-ui/react";
+import { Text, HStack, VStack, Box, useToast } from "@chakra-ui/react";
 import type { NextPage } from "next";
 import { Dashboard } from "../components/Layout/Dashboard";
 import Dropzone from "react-dropzone";
@@ -17,7 +7,7 @@ import { useRouter } from "next/router";
 
 const Home: NextPage = () => {
     const { newFile } = useTurnData();
-    const toast = useToast();
+    const toast = useToast({ position: "bottom-left" });
     const router = useRouter();
     return (
         <Dashboard plane={true}>
