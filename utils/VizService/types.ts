@@ -1,6 +1,7 @@
 export type MapData = {
     metadata: MapMetaData;
     map: TileData[];
+    annotations: string[];
     players: {
         me: PlayerData;
         opponents: PlayerData[];

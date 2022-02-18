@@ -41,3 +41,20 @@ PLAYER_DATA:{
     pos : "0_0"
     ...rest
 }
+let map=[]
+for(let i=0;i<20;i++){
+    for(let j=0;j<20;j++){
+        map.push({
+            pos:i+"_"+j,
+            tile_type: i+j>20?"DEF":"ENERGY"
+        })
+    }   
+}
+
+let map=[]
+for(let i=0;i<10;i++){ 
+    map.push({
+            pos:Math.floor(Math.random() * 20)+"_"+Math.floor(Math.random() * 20),
+            tile_type: "WALL"
+        })
+}
