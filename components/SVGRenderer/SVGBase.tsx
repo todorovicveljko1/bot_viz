@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { SVGRegisterEvents } from "../../utils/SVGRegisterEvents";
 import { VizService } from "../../utils/VizService";
-import data from "../../public/example.json";
 import { useColorMode, useToken } from "@chakra-ui/react";
+import { useTurnData } from "../../utils/turnData";
 
 export type SVGBaseProps = {
     children?: JSX.Element | JSX.Element | string | string[];
@@ -11,9 +11,9 @@ export type SVGBaseProps = {
 
 export function SVGBase(props: SVGBaseProps) {
     const svgRef = useRef<SVGSVGElement>(null);
-    const [zoomLevel, setZoomLevel] = useState(props.zoomLevel ?? 800);
-    const [positionOffset, setPositionOffset] = useState([0, 0]);
+    const zoomLevel = VizService.getInstance().zoom;
     const { colorMode } = useColorMode();
+    const { data, turns } = useTurnData();
     const [fillDark, strokeDark, fillLight, strokeLight] = useToken("colors", [
         "whiteAlpha.100",
         "whiteAlpha.300",
@@ -23,15 +23,12 @@ export function SVGBase(props: SVGBaseProps) {
     useEffect(
         function () {
             if (svgRef.current) {
-                SVGRegisterEvents(svgRef.current, {
-                    setPositionOffset,
-                    zoomLevel,
-                });
                 VizService.getInstance().linkToSVG(svgRef.current);
-                //VizService.getInstance().loadJSON(data);
+                VizService.getInstance().loadInitData(data, turns);
+                return SVGRegisterEvents(svgRef.current, {});
             }
         },
-        [zoomLevel]
+        [data, turns]
     );
 
     return (
@@ -43,15 +40,15 @@ export function SVGBase(props: SVGBaseProps) {
             ${
                 svgRef.current
                     ? svgRef.current.viewBox.baseVal.x
-                    : -zoomLevel / 2 - positionOffset[0]
+                    : -zoomLevel / 2
             }
             ${
                 svgRef.current
                     ? svgRef.current.viewBox.baseVal.y
-                    : -zoomLevel / 2 - positionOffset[1]
+                    : -zoomLevel / 2
             }
-            ${zoomLevel}
-            ${zoomLevel}
+            ${svgRef.current ? svgRef.current.viewBox.baseVal.width : zoomLevel}
+            ${svgRef.current ? svgRef.current.viewBox.baseVal.width : zoomLevel}
           `}
             fill={colorMode == "light" ? fillLight : fillDark}
             stroke={colorMode == "light" ? strokeLight : strokeDark}

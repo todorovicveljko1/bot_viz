@@ -12,7 +12,7 @@ import { useTurnData } from "../../utils/turnData";
 export interface TurnTimelineProps {}
 
 export function TurnTimeline(props: TurnTimelineProps) {
-    const { turn, nextTurn, prevTurn, data, setTurn } = useTurnData();
+    const { turn, nextTurn, prevTurn, turns, setTurn } = useTurnData();
     const { colorMode } = useColorMode();
     const c =
         colorMode == "light"
@@ -31,7 +31,7 @@ export function TurnTimeline(props: TurnTimelineProps) {
                 alignItems="center"
                 fontWeight={"medium"}
             >
-                {data &&
+                {turns &&
                     Array(25)
                         .fill(0)
                         .map((k, i) => (
@@ -50,7 +50,7 @@ export function TurnTimeline(props: TurnTimelineProps) {
                                 onClick={() => setTurn(turn + i - 12)}
                                 opacity={
                                     turn + i - 12 < 0 ||
-                                    turn + i - 12 >= data.length
+                                    turn + i - 12 >= turns.length
                                         ? 0
                                         : 100
                                 }

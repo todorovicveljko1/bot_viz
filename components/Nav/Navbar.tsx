@@ -9,21 +9,14 @@ import { DownloadIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Dropzone, { DropzoneRef } from "react-dropzone";
 import { useTurnData } from "../../utils/turnData";
 import { createRef } from "react";
+import { useRouter } from "next/router";
 
 export interface NavbarProps {}
 
 export function Navbar(props: NavbarProps) {
     const { colorMode, toggleColorMode } = useColorMode();
     const dropzoneRef = createRef<DropzoneRef>();
-    const openDialog = () => {
-        // Note that the ref is set async,
-        // so it might be null at some point
-        console.log(dropzoneRef.current);
-        if (dropzoneRef.current) {
-            dropzoneRef.current.open();
-        }
-    };
-
+    const router = useRouter();
     const { newFile } = useTurnData();
     const toast = useToast({ position: "bottom-left" });
     return (
@@ -60,6 +53,8 @@ export function Navbar(props: NavbarProps) {
                                     }
 
                                     newFile(v);
+                                    if (router.route != "/app")
+                                        router.push("/app");
                                 })
                                 .catch(() => {
                                     toast({

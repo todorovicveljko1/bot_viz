@@ -10,6 +10,9 @@ data : {
     map:{
         "0_0" : @TILE_DATA@
     }
+    annotations: {
+
+    }
     players:{
         me:PLAYER_DATA
         others:[

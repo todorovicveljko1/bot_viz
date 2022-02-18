@@ -1,21 +1,24 @@
 import { createContext, useContext, useState } from "react";
+import { VizService } from "./VizService";
+import { MapData } from "./VizService/types";
 
-type TurnData = {
+export type TurnData = {
     debug: { [key: number]: any };
-    data: [];
-    annotations: [];
+    data: MapData;
 };
 
 interface DebugDataProviderProps {
     children: any;
     root?: any;
     turns?: TurnData[] | any;
+    data?: MapData;
 }
 
 type contextData = {
     turn: number;
-    data: TurnData[];
+    turns: TurnData[];
     active: TurnData;
+    data: MapData;
     nextTurn: () => void;
     prevTurn: () => void;
     setTurn: (turn: number) => void;
@@ -26,34 +29,38 @@ type contextData = {
 const TurnDataContext = createContext<any>(null);
 export const TurnDataProvider = (props: DebugDataProviderProps) => {
     const [turn, _setTurn] = useState(-1);
-    const [data, setTurnsData] = useState(props.turns);
+    const [turns, setTurns] = useState(props.turns);
     const [active, setActiveTurn] = useState<TurnData | null>(null);
     const [root, setRoot] = useState(props.root);
+    const [data, setData] = useState(props.data);
     const nextTurn = () => {
-        console.log(data.length, turn);
-        if (data && data.length > turn + 1) {
+        if (turns && turns.length > turn + 1) {
             let t = turn + 1;
             _setTurn(t);
-            setActiveTurn(data[t]);
+            setActiveTurn(turns[t]);
+            VizService.getInstance().renderer?.nextTurn();
         }
     };
     const prevTurn = () => {
-        if (data && turn > 0) {
+        if (turns && turn > 0) {
             let t = turn - 1;
             _setTurn(t);
-            setActiveTurn(data[t]);
+            setActiveTurn(turns[t]);
+            VizService.getInstance().renderer?.prevTurn();
         }
     };
     const setTurn = (_turn: number) => {
-        if (data && _turn >= 0 && _turn < data.length) {
+        if (turns && _turn >= 0 && _turn < turns.length) {
             _setTurn(_turn);
-            setActiveTurn(data[_turn]);
+            setActiveTurn(turns[_turn]);
+            VizService.getInstance().renderer?.setTurn(_turn);
         }
     };
     const newFile = (_data: any) => {
         _setTurn(-1);
-        setTurnsData(_data.turns);
+        setTurns(_data.turns);
         setRoot(_data.root);
+        setData(_data.data);
         setActiveTurn(null);
     };
 
@@ -61,13 +68,14 @@ export const TurnDataProvider = (props: DebugDataProviderProps) => {
         <TurnDataContext.Provider
             value={{
                 turn,
-                data,
+                turns,
                 active,
                 nextTurn,
                 prevTurn,
                 setTurn,
                 root,
                 newFile,
+                data,
             }}
         >
             {props.children}

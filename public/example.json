@@ -57,6 +57,35 @@
             }
         ]
     },
+    "data": {
+        "metadata": {
+            "type": "SQUARE",
+            "tile_type": {
+                "DEF": "#38B2AC",
+                "ENERGY": "#48BB78",
+                "WALL": "red"
+            }
+        },
+        "map": [
+            {
+                "pos": "0_0",
+                "tile_type": "DEF"
+            },
+            {
+                "pos": "0_1",
+                "tile_type": "DEF"
+            },
+            {
+                "pos": "1_0",
+                "tile_type": "ENERGY"
+            },
+            {
+                "pos": "1_1",
+                "tile_type": "ENERGY"
+            }
+        ],
+        "players": {}
+    },
     "turns": [
         {
             "debug": [
@@ -105,8 +134,7 @@
                     "status": "PENDING"
                 }
             ],
-            "data": [],
-            "annotations": []
+            "data": {}
         },
         {
             "debug": [
@@ -155,8 +183,14 @@
                     "status": "PENDING"
                 }
             ],
-            "data": [],
-            "annotations": []
+            "data": {
+                "map": [
+                    {
+                        "pos": "0_0",
+                        "tile_type": "WALL"
+                    }
+                ]
+            }
         },
         {
             "debug": [
@@ -205,8 +239,14 @@
                     "status": "PENDING"
                 }
             ],
-            "data": [],
-            "annotations": []
+            "data": {
+                "map": [
+                    {
+                        "pos": "0_1",
+                        "tile_type": "WALL"
+                    }
+                ]
+            }
         }
     ]
 }

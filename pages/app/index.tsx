@@ -31,9 +31,7 @@ const Home: NextPage = () => {
                         }
                         minH={0}
                     >
-                        <SVGBase>
-                            <circle cx="50" cy="50" r="50" />
-                        </SVGBase>
+                        <SVGBase></SVGBase>
                     </GridItem>
                     <GridItem minH={0}>
                         <Root _id={0} _type="DecisionLogic" root={root}></Root>
