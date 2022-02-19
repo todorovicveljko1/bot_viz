@@ -1,6 +1,15 @@
 import { MapData, TileData } from "./types";
 import { $ } from "./domHelper";
 import { TurnData } from "../turnData";
+
+const ANNOT_ATTR = {
+    stroke: "#444444",
+    fill: "none",
+    "stroke-width": "2",
+    "vector-effect": "non-scaling-stroke",
+    "stroke-dasharray": "11, 5",
+};
+
 export class MapRenderer {
     public svg: SVGSVGElement;
     public data: MapData;
@@ -13,6 +22,7 @@ export class MapRenderer {
     public mapHolder: SVGElement;
     public anotHolder: SVGElement;
     public playerHolder: SVGElement;
+
     constructor(svg: SVGSVGElement, data: MapData, turns: TurnData[]) {
         this.svg = svg;
         this.data = data;
@@ -79,7 +89,6 @@ export class MapRenderer {
         this.anotHolder.innerHTML = "";
         this.playerHolder.innerHTML = "";
         this._render_annotations();
-
         if (this.data.players.me && this.data.players.opponents)
             this._render_players();
     }
@@ -87,7 +96,60 @@ export class MapRenderer {
         return;
     }
 
-    public _render_annotations() {}
+    public _render_annotations() {
+        console.log("TEST");
+        if (this.turn < 0) return;
+        let annots = this.turns[this.turn].data.annotations;
+        if (!annots) return;
+        let temp;
+        for (let strs of annots) {
+            let parts = strs.split(",");
+            switch (parts[0]) {
+                case "L":
+                    // LINE
+                    temp = $.SVG("path", {
+                        ...ANNOT_ATTR,
+                        d: this._get_path(parts),
+                        "marker-end": "url(#ARROW_HEAD)",
+                    });
+                    this.anotHolder.append(temp);
+                    break;
+                case "A":
+                    // Arrow
+                    temp = $.SVG("path", {
+                        ...ANNOT_ATTR,
+                        d: this._get_path(parts),
+                    });
+                    this.anotHolder.append(temp);
+                    break;
+                case "C":
+                    // Circle
+                    temp = this.getTileCenter(parts[1]);
+                    temp = $.SVG("circle", {
+                        ...ANNOT_ATTR,
+                        cx: temp[0],
+                        cy: temp[1],
+                        r: "15",
+                        fill: parts.length > 2 ? parts[2] : ANNOT_ATTR.fill,
+                    });
+                    this.anotHolder.append(temp);
+                    break;
+                case "X":
+                    // Cross
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    public _get_path(parts: string[]) {
+        let out = "";
+        for (let i = 1; i < parts.length; i++) {
+            let cords = this.getTileCenter(parts[i]);
+            out += `${i != 1 ? "L" : "M"} ${cords[0]},${cords[1]}`;
+        }
+        return out;
+    }
     public _render_players() {
         let data: MapData;
         if (this.turn < 0) {

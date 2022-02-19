@@ -53,7 +53,7 @@ export function SVGRegisterEvents(
         event.preventDefault();
         let newLocalZoomLevel = Math.max(
             Math.min(localZoomLevel + event.deltaY * -1, 2000),
-            400
+            200
         );
         svg.viewBox.baseVal.x += -(newLocalZoomLevel - localZoomLevel) / 4;
         svg.viewBox.baseVal.y += -(newLocalZoomLevel - localZoomLevel) / 4;
