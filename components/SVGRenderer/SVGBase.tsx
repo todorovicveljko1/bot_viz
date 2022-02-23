@@ -15,8 +15,8 @@ export function SVGBase(props: SVGBaseProps) {
     const { colorMode } = useColorMode();
     const { data, turns } = useTurnData();
     const [fillDark, strokeDark, fillLight, strokeLight] = useToken("colors", [
-        "whiteAlpha.100",
-        "whiteAlpha.300",
+        "gray.700",
+        "gray.900",
         "gray.100",
         "gray.300",
     ]);
