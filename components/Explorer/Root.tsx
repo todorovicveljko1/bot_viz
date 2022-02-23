@@ -6,11 +6,13 @@ import {
     Text,
     Collapse,
     Button,
+    useColorMode,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { ms_time } from "../../utils/ms_time";
 import { statusPick } from "../../utils/theme";
 import { useTurnData } from "../../utils/turnData";
+import { ObjectShow } from "../Layout/ObjectShow";
 import { Block, BlockProps } from "./Block";
 
 export interface RootProps {
@@ -26,9 +28,10 @@ export interface RootProps {
 export function Root(props: RootProps) {
     const [isOpen, setIsOpen] = useState(true);
     const { active } = useTurnData();
+    const { colorMode } = useColorMode();
     return (
         <VStack py="5" alignItems={"start"} height={"full"} overflowY="scroll">
-            <UnorderedList listStyleType={"none"} mx={"unset"}>
+            <UnorderedList listStyleType={"none"} mx={"unset"} w="full">
                 <ListItem my="0.5">
                     <HStack
                         onClick={(e) => {
@@ -59,6 +62,32 @@ export function Root(props: RootProps) {
                         </UnorderedList>
                     </Collapse>
                 </ListItem>
+                {active && active.data && (
+                    <>
+                        <ListItem
+                            my="5"
+                            borderBottom="1px"
+                            borderBottomColor={
+                                colorMode == "light"
+                                    ? "gray.300"
+                                    : "whiteAlpha.300"
+                            }
+                            w="full"
+                        />
+                        <ListItem my="0.5">
+                            <ObjectShow
+                                obj={active.data.players.me}
+                                title="Me"
+                            />
+                        </ListItem>
+                        <ListItem my="0.5">
+                            <ObjectShow
+                                obj={active.data.players.opponents}
+                                title="Opponents"
+                            />
+                        </ListItem>
+                    </>
+                )}
             </UnorderedList>
         </VStack>
     );
