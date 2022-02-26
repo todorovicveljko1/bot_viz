@@ -21,7 +21,7 @@ export function SVGRegisterEvents(
     let localZoomLevel = VizService.getInstance().zoom;
     if (info == null) {
         info = $("pre#tile_info", {
-            style: "position: relative; top: -100%; left:4px; padding: 4px;",
+            style: "position: relative; top: -100%; left:4px; width:320px; padding: 4px;",
         });
         if (svg.parentElement) svg.parentElement.append(info);
     } else {

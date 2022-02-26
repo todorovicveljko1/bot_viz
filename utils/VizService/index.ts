@@ -52,7 +52,7 @@ export class VizService {
     }
     public _presetDefs() {
         let defs = $.SVG("defs");
-        defs.innerHTML = `<marker stroke="#444444" fill="none" id="ARROW_HEAD" markerWidth="12" markerHeight="10" 
+        defs.innerHTML = `<marker stroke="white" fill="none" id="ARROW_HEAD" markerWidth="12" markerHeight="10" 
         refX="8" refY="4" markerUnits="userSpaceOnUse" orient="auto">
             <polyline points="0 0, 10 4, 0 8" />
         </marker>`;

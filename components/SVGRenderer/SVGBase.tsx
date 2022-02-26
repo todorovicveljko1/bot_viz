@@ -16,9 +16,9 @@ export function SVGBase(props: SVGBaseProps) {
     const { data, turns } = useTurnData();
     const [fillDark, strokeDark, fillLight, strokeLight] = useToken("colors", [
         "gray.700",
-        "gray.900",
-        "gray.100",
+        "gray.800",
         "gray.300",
+        "white",
     ]);
     useEffect(
         function () {

@@ -3,7 +3,7 @@ import { $ } from "./domHelper";
 import { TurnData } from "../turnData";
 
 const ANNOT_ATTR = {
-    stroke: "#444444",
+    stroke: "white",
     fill: "none",
     "stroke-width": "2",
     "vector-effect": "non-scaling-stroke",
@@ -110,7 +110,6 @@ export class MapRenderer {
                     temp = $.SVG("path", {
                         ...ANNOT_ATTR,
                         d: this._get_path(parts),
-                        "marker-end": "url(#ARROW_HEAD)",
                     });
                     this.anotHolder.append(temp);
                     break;
@@ -119,6 +118,7 @@ export class MapRenderer {
                     temp = $.SVG("path", {
                         ...ANNOT_ATTR,
                         d: this._get_path(parts),
+                        "marker-end": "url(#ARROW_HEAD)",
                     });
                     this.anotHolder.append(temp);
                     break;

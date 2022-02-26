@@ -62,30 +62,32 @@ export function Root(props: RootProps) {
                         </UnorderedList>
                     </Collapse>
                 </ListItem>
+                <ListItem
+                    my="5"
+                    borderBottom="1px"
+                    borderBottomColor={
+                        colorMode == "light" ? "gray.300" : "whiteAlpha.300"
+                    }
+                    w="full"
+                />
                 {active && active.data && (
                     <>
-                        <ListItem
-                            my="5"
-                            borderBottom="1px"
-                            borderBottomColor={
-                                colorMode == "light"
-                                    ? "gray.300"
-                                    : "whiteAlpha.300"
-                            }
-                            w="full"
-                        />
-                        <ListItem my="0.5">
-                            <ObjectShow
-                                obj={active.data.players.me}
-                                title="Me"
-                            />
-                        </ListItem>
-                        <ListItem my="0.5">
-                            <ObjectShow
-                                obj={active.data.players.opponents}
-                                title="Opponents"
-                            />
-                        </ListItem>
+                        {active.data.players.me && (
+                            <ListItem my="0.5">
+                                <ObjectShow
+                                    obj={active.data.players.me}
+                                    title="Me"
+                                />
+                            </ListItem>
+                        )}
+                        {active.data.players.opponents.length > 0 && (
+                            <ListItem my="0.5">
+                                <ObjectShow
+                                    obj={active.data.players.opponents}
+                                    title="Opponents"
+                                />
+                            </ListItem>
+                        )}
                     </>
                 )}
             </UnorderedList>
