@@ -6,7 +6,6 @@ const ANNOT_ATTR = {
     stroke: "white",
     fill: "none",
     "stroke-width": "2",
-    "vector-effect": "non-scaling-stroke",
     "stroke-dasharray": "11, 5",
 };
 
@@ -97,7 +96,6 @@ export class MapRenderer {
     }
 
     public _render_annotations() {
-        console.log("TEST");
         if (this.turn < 0) return;
         let annots = this.turns[this.turn].data.annotations;
         if (!annots) return;
@@ -134,8 +132,23 @@ export class MapRenderer {
                     });
                     this.anotHolder.append(temp);
                     break;
-                case "X":
-                    // Cross
+                case "T":
+                    // Text
+                    temp = this.getTileCenter(parts[1]);
+                    temp = $.SVG(
+                        "text",
+                        {
+                            transform: `translate(${temp[0]},${temp[1] + 2})`,
+                            stroke: `black`,
+                            fill: `black`,
+                            "text-anchor": "middle",
+                            "font-size": "12px",
+                            "line-height": "12px",
+                            "dominant-baseline": "middle",
+                        },
+                        parts[2]
+                    );
+                    this.anotHolder.append(temp);
                     break;
                 default:
                     break;
